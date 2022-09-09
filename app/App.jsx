@@ -3,6 +3,18 @@ import Die from '../app/components/Die.jsx'
 
 export default function App() {
   const [dicez, setDicez] = React.useState(genDice())
+  const [tenzies, setTenzies] = React.useState(false)
+
+  const text = tenzies ? "Start ovah" : "R'n'Roll"
+
+  React.useEffect(() => {
+    const dieValue = dicez[0].value
+    dicez.every(die => die.held) &&
+    dicez.every(die => die.value === dieValue) &&
+    setTenzies(true)
+  }, [dicez])
+
+  // console.log(tenzies)
 
   function holdDice(id) {
     setDicez(prevDicez => prevDicez.map(die => {
@@ -36,7 +48,7 @@ export default function App() {
       key={die.key}
     />)
   )
-  console.log(dicez)
+
 
   function diceRoll() {
     setDicez(prev => prev.map((die, i) => {
@@ -51,7 +63,7 @@ export default function App() {
         <div className='dice-container'>
           {dice}
         </div>
-        <button onClick={diceRoll} className='roll-btn'>ROOOOLL</button>
+        <button onClick={diceRoll} className='roll-btn'>{text}</button>
       </section>
     )
 }
