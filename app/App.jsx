@@ -10,22 +10,44 @@ export default function App() {
     }))
   }
 
+  function genDie(i) {
+    return {
+      value: Math.floor(Math.random()*6+1),
+      id: i,
+      key: i,
+      held: false
+    }
+  }
+
   function genDice() {
     const nArr = []
-    for (let i = 1; i <= 10; i++) {
-      nArr.push({value: Math.floor(Math.random()*6+1), id: i, held: false, key: i});
+    for (let i = 0; i < 10; i++) {
+      nArr.push(genDie(i));
     }
     return nArr
   }
 
-  const dice = dicez.map(die => <Die hold={holdDice} value={die.value} held={die.held} holdDice={() => holdDice(die.id)} key={die.key}/>)
+  const dice = dicez.map(die =>
+    (<Die
+      hold={holdDice}
+      value={die.value}
+      held={die.held}
+      holdDice={() => holdDice(die.id)}
+      key={die.key}
+    />)
+  )
+  console.log(dicez)
 
   function diceRoll() {
-    setDicez(genDice())
+    setDicez(prev => prev.map((die, i) => {
+      return die.held ? die : genDie(i)
+    }))
   }
 
     return (
       <section className='main-container'>
+        <h1 className="title">Tenzies</h1>
+        <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
         <div className='dice-container'>
           {dice}
         </div>
