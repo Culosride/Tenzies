@@ -2,20 +2,28 @@ import React from 'react'
 import Die from '../app/components/Die.jsx'
 
 export default function App() {
-  const nArr = []
+  const [dicez, setDicez] = React.useState(genDice())
 
-  for (let i = 1; i <= 10; i++) {
-    nArr.push(Math.floor(Math.random()*6+1));
+  function genDice() {
+    const nArr = []
+    for (let i = 1; i <= 10; i++) {
+      nArr.push({value: Math.floor(Math.random()*6+1), held: false, key: i});
+    }
+    return nArr
   }
-  const dice = nArr.map((die, i)=> <Die value={die} key={i}/>)
 
-  const [dicez, setDicez] = React.useState(dice)
+  const dice = dicez.map((die, i)=> <Die value={die.value} key={die.key}/>)
+
+  function diceRoll() {
+    setDicez(genDice())
+  }
 
     return (
       <section className='main-container'>
         <div className='dice-container'>
-          {dicez}
+          {dice}
         </div>
+        <button onClick={diceRoll} className='roll-btn'>ROOOOLL</button>
       </section>
     )
 }
