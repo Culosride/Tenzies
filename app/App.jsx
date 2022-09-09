@@ -12,8 +12,7 @@ export default function App() {
     return nArr
   }
 
-  const dice = dicez.map((die, i)=> <Die value={die.value} key={die.key}/>)
-
+  const dice = dicez.map(die => <Die value={die.value} held={die.held} key={die.key}/>)
   function diceRoll() {
     setDicez(genDice())
   }
