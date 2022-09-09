@@ -12,12 +12,6 @@ body {
   padding: 24px;
 }
 
-.dice-container {
-  display: grid;
-  grid-template: auto auto / repeat(5, 1fr);
-  gap: 20px;
-}
-
 .main-container {
   background-color: #F5F5F5;
   height: 400px;
