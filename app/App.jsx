@@ -15,8 +15,6 @@ export default function App() {
     setTenzies(true)
   }, [dicez])
 
-  // console.log(tenzies)
-
   function holdDice(id) {
     setDicez(prevDicez => prevDicez.map(die => {
       return (die.id === id) ? ({...die, held: !die.held}) : die
@@ -51,14 +49,13 @@ export default function App() {
   )
 
   function diceRoll() {
-    tenzies === false &&
+    !tenzies &&
     setDicez(prev => prev.map((die, i) => {
       return die.held ? die : genDie(i)
     })) ||
     tenzies &&
     setDicez(genDice());
     setTenzies(false)
-    console.log(tenzies)
   }
 
     return (
