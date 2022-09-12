@@ -1,5 +1,6 @@
 import React from 'react'
 import Die from '../app/components/Die.jsx'
+import Confetti from '../app/components/Confetti.jsx'
 
 export default function App() {
   const [dicez, setDicez] = React.useState(genDice())
@@ -49,15 +50,20 @@ export default function App() {
     />)
   )
 
-
   function diceRoll() {
+    tenzies === false &&
     setDicez(prev => prev.map((die, i) => {
       return die.held ? die : genDie(i)
-    }))
+    })) ||
+    tenzies &&
+    setDicez(genDice());
+    setTenzies(false)
+    console.log(tenzies)
   }
 
     return (
       <section className='main-container'>
+        {tenzies && <Confetti />}
         <h1 className="title">Tenzies</h1>
         <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
         <div className='dice-container'>
