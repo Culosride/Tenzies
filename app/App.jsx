@@ -1,11 +1,11 @@
 import React from 'react'
 import Die from '../app/components/Die.jsx'
 import Confetti from '../app/components/Confetti.jsx'
+import jb from '/home/andrea/tenzies/app/assets/jb_cut.mp3';
 
 export default function App() {
   const [dicez, setDicez] = React.useState(genDice())
   const [tenzies, setTenzies] = React.useState(false)
-
   const text = tenzies ? "Start ovah" : "R'n'Roll"
 
   React.useEffect(() => {
@@ -61,6 +61,7 @@ export default function App() {
     return (
       <section className='main-container'>
         {tenzies && <Confetti />}
+        {tenzies && <audio autoPlay allow="autoplay" src={jb}/>}
         <h1 className="title">Tenzies</h1>
         <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
         <div className='dice-container'>
